@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "Grammar-Lite Corrector",
+    "version": "1.0",
+    "description": "A simple grammar checker that uses a local AI model.",
+    "permissions": [
+      "activeTab"
+    ],
+    "host_permissions": [
+      "http://127.0.0.1:8000/*"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"],
+        "css": ["style.css"]
+      }
+    ],
+    "icons": {
+      "48": "icon2.png",
+      "128": "icon2.png"
+    }
+  }
