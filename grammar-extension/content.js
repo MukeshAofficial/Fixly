@@ -1,6 +1,40 @@
 // --- 1. Configuration & Debouncing ---
-console.log("✅ Grammar-Lite content script loaded!");
+console.log("✅ Fixly content script loaded!");
 const API_URL = "http://127.0.0.1:8000/correct";
+
+// Create and append the floating icon
+const floatingIcon = document.createElement('div');
+floatingIcon.className = 'fixly-icon';
+floatingIcon.textContent = 'F';
+floatingIcon.style.left = '20px';
+floatingIcon.style.top = '20px';
+document.body.appendChild(floatingIcon);
+
+// Make the icon draggable
+let isDragging = false;
+let offsetX, offsetY;
+
+floatingIcon.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - floatingIcon.getBoundingClientRect().left;
+    offsetY = e.clientY - floatingIcon.getBoundingClientRect().top;
+    floatingIcon.style.cursor = 'grabbing';
+    document.body.style.userSelect = 'none';
+});
+
+document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const newX = e.clientX - offsetX;
+    const newY = e.clientY - offsetY;
+    floatingIcon.style.left = `${newX}px`;
+    floatingIcon.style.top = `${newY}px`;
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+    floatingIcon.style.cursor = 'move';
+    document.body.style.userSelect = '';
+});
 
 function debounce(func, delay) {
     let timeout;
@@ -40,7 +74,7 @@ async function checkGrammar(event) {
         displaySuggestion(targetElement, originalText, correctedText);
 
     } catch (error) {
-        console.error("Grammar-Lite Error:", error);
+        console.error("Fixly Error:", error);
     }
 }
 
@@ -67,7 +101,10 @@ function displaySuggestion(target, original, corrected) {
     suggestionBox.className = 'grammar-suggestion-box';
     suggestionBox.innerHTML = createDiffHTML(original, corrected);
 
-    suggestionBox.dataset.targetId = target.id || (target.id = `gl-target-${Date.now()}`);
+    // Position the suggestion box near the icon
+    const iconRect = floatingIcon.getBoundingClientRect();
+    suggestionBox.style.left = `${iconRect.right + 10}px`;
+    suggestionBox.style.top = `${iconRect.top}px`;
 
     suggestionBox.addEventListener('click', () => {
         if (target.value !== undefined) {
@@ -80,6 +117,8 @@ function displaySuggestion(target, original, corrected) {
     
     document.body.appendChild(suggestionBox);
 }
+
+
 
 function removeSuggestion() {
     const existingSuggestion = document.querySelector('.grammar-suggestion-box');

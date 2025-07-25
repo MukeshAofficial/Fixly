@@ -1,19 +1,36 @@
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
+/* Floating icon */
+.fixly-icon {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    cursor: move;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    user-select: none;
+    transition: transform 0.2s;
+}
+
+.fixly-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Suggestion box */
 .grammar-suggestion-box {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9999;
+    z-index: 10000;
     background-color: #2c2c2c;
     color: #f1f1f1;
     border: 1px solid #444;
@@ -22,20 +39,25 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     font-size: 14px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
     max-width: 350px;
     line-height: 1.5;
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.2s ease-out;
+    pointer-events: auto;
 }
 
-.grammar-suggestion-box:before {
-    content: 'Grammar-Lite';
+.grammar-suggestion-box .header {
+    padding: 8px 12px;
+    background-color: #3a3a3a;
+    cursor: move;
+    border-bottom: 1px solid #444;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     font-weight: 600;
-    display: block;
-    margin-bottom: 8px;
-    color: #a9a9a9;
-    font-size: 12px;
-    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.grammar-suggestion-box .content {
+    padding: 12px;
 }
 
 .grammar-suggestion-box:hover {
@@ -46,4 +68,18 @@
     color: #76e8a6;
     text-decoration: none;
     font-weight: 600;
+}
+
+/* Hide scrollbar but keep functionality */
+.grammar-suggestion-box::-webkit-scrollbar {
+    width: 5px;
+}
+
+.grammar-suggestion-box::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+}
+
+.grammar-suggestion-box::-webkit-scrollbar-track {
+    background: transparent;
 }

@@ -1,5 +1,5 @@
 chrome.runtime.onInstalled.addListener(() => {
-  console.log('✅ Grammar-Lite extension installed!');
+  console.log('✅ Fixly extension installed!');
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
