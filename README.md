@@ -66,6 +66,8 @@ pip install -r requirements.txt
 # Run the local server
 uvicorn main:app --reload
 
+```
+
 Your API backend should now be running at http://12.0.0.1:8000.
 
 2. Frontend (Chrome Extension) Setup
