@@ -1,5 +1,5 @@
 fastapi==0.116.1
 pydantic==2.11.7
 torch==2.2.0
-transformers==4.53.3
+transformers
 gunicorn
