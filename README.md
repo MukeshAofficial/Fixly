@@ -65,3 +65,18 @@ pip install -r requirements.txt
 
 # Run the local server
 uvicorn main:app --reload
+
+Your API backend should now be running at http://12.0.0.1:8000.
+
+2. Frontend (Chrome Extension) Setup
+Next, load the extension into your Chrome browser.
+
+Open Google Chrome and navigate to chrome://extensions.
+
+Enable "Developer mode" using the toggle switch in the top-right corner.
+
+Click the "Load unpacked" button.
+
+Select the grammar-extension folder from the project directory.
+
+The "Fixly" extension should now appear in your list and be active!
